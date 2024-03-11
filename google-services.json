@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074357020595",
+    "project_id": "kidssecurity-796dc",
+    "storage_bucket": "kidssecurity-796dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074357020595:android:7e1a44152c7c08e06a4dc6",
+        "android_client_info": {
+          "package_name": "com.triplebit.KidsSecurity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy0FQT1HdZ07bjd7e78pbq-CIhakoHgqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
