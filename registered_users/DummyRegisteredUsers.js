@@ -1,3 +1,4 @@
+/*
 export const DUMMY_REGISTERED_USERS = [
   {
     id: "id1",
@@ -18,3 +19,5 @@ export const DUMMY_REGISTERED_USERS = [
     pushToken: "notKnown",
   },
 ];
+*/
+export const DUMMY_REGISTERED_USERS = [];

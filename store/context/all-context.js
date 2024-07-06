@@ -4,7 +4,8 @@ import { DUMMY_REGISTERED_USERS } from "../../registered_users/DummyRegisteredUs
 export const AllContext = createContext({
   addedUserCtx: "testuser",
   addedPhoneNumberCtx: 4344340,
-  registeredUsersCtx: DUMMY_REGISTERED_USERS,
+  //registeredUsersCtx: DUMMY_REGISTERED_USERS,
+  registeredUsersCtx: () => {},
   addRegisteredUserCtx: () => {},
   removeRegisteredUserCtx: () => {},
   removeAllRegisteredUserCtx: () => {},
@@ -12,6 +13,8 @@ export const AllContext = createContext({
   addExpoPushTokenCtx: () => {},
   setLocalPhoneNumberCtx: () => {},
   localPhoneNumberCtx: () => {},
+  displayLocationStoreCtx: () => {},
+  setDisplayLocationStoreCtx: () => {}
 });
 
 // this is actuall component
@@ -25,6 +28,7 @@ function AllContextComponent({ children }) {
   });
   const [localPushToken, setLocalPushToken] = useState("");
   const [localPhoneNumber, setLocalPhoneNumber] = useState("0523010298");
+  const [displayLocationStore,setDisplayLocationStore] = useState(false);
 
   const addRegisteredUser = (newUser) => {
     const userRecordExists = registeredUsers.find((user) => {
@@ -92,14 +96,6 @@ function AllContextComponent({ children }) {
     setRegsiteredUsers([]);
   };
 
-  /* 
-  const sendBackLocalPushTken = () => {
-    console.log("inside sendBackLocation");
-
-    return "localPushToken = " + pushToken;
-  };
-*/
-
   const contextxValue = {
     addedUserCtx: addedUserState.user,
     addedPhoneNumberCtx: addedUserState.phone,
@@ -112,6 +108,8 @@ function AllContextComponent({ children }) {
     addExpoPushTokenCtx: setLocalPushToken,
     setLocalPhoneNumberCtx: setLocalPhoneNumber,
     localPhoneNumberCtx: localPhoneNumber,
+    displayLocationStoreCtx: displayLocationStore,
+    setDisplayLocationStoreCtx: setDisplayLocationStore
   };
   //console.log("contextxValue = " + JSON.stringify(contextxValue, null, 2));
   return (

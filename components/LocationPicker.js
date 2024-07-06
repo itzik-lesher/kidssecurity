@@ -8,14 +8,88 @@ import {
   reverseGeocodeAsync,
 } from "expo-location";
 import { COLORS } from "../constnats/colors";
+//!! add zustand
+import { create } from "zustand";
+
+function getlocation2() {
+  return [24, 27];
+}
+
+export const useBearStore2 = create((set) => ({
+  bears: 10,
+  location: [],
+  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  removeAllBears: () => set({ bears: 0 }),
+  isFunctionCalled: false,
+
+  // Define function to call component function
+  callComponentFunction: () => {
+    set({ isFunctionCalled: true });
+  },
+
+  // Reset function
+  reset: () => {
+    set({ isFunctionCalled: false });
+  },
+
+  // Define Zustand state properties
+  zustandProperty: [],
+
+  // Define function to update Zustand state using component state value
+  setZustandProperty: (value) => set({ zustandProperty: value }),
+  
+  /////////////////  only in the sender  ///////////////////////////////
+  // define function for update the accepted location in the local: Actually the sender
+  zustandAcceptedLocation: [],
+
+  // Define function to update Zustand state using component state value
+  setZustandAcceptedLocation: (value) => set({ zustandAcceptedLocation: value }),
+
+// Define Zustand state Platform Modal
+zustandPlatformModel: [],
+
+// Define function to update Zustand state using component state value
+setZustandPlatformModel: (value) => set({ zustandPlatformModel: value }),
+
+
+}));
+//!!
+
 
 //function LocationPicker() {
 const LocationPicker = forwardRef((props, ref) => {
+  //!!
+  const isFunctionCalled = useBearStore2((state) => state.isFunctionCalled);
+  //!!
   useImperativeHandle(ref, () => {
     return {
       myLocation: getLocationHandler,
     };
   });
+
+  //!!
+
+// Zustand hook to access the store and setter function
+const setZustandProperty = useBearStore2((state) => state.setZustandProperty);
+useEffect(() => {
+  async function getLocation() {
+    let loc = await getLocationHandler();
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxuseEffect - loc");
+    console.log(JSON.stringify(loc, null, 2));
+    setZustandProperty(loc);
+  }
+
+  let location2 = getLocation();
+  // this call failed. Calling from inside getLocation worked
+  //setZustandProperty(location2);
+
+  console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLuseEffect - ENTER LocationPicker");
+  console.log("useeffect bears = " + useBearStore2.getState().bears);
+  console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLuseEffect - loc2");
+  console.log(JSON.stringify(location2, null, 2));
+}, [isFunctionCalled]);
+
+  //!!
 
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
@@ -36,6 +110,7 @@ const LocationPicker = forwardRef((props, ref) => {
   }, []);
 */
   async function verifyPermissions() {
+    /*
     console.log(
       "!!!!!!!!!!!!!!!!locationPermissionInformation.status =" +
         locationPermissionInformation.status
@@ -43,7 +118,10 @@ const LocationPicker = forwardRef((props, ref) => {
     if (
       //locationPermissionInformation.status === PermissionStatus.UNDETERMINED ||
       locationPermissionInformation.status != PermissionStatus.GRANTED
-    ) {
+    )
+    */
+    if ( locationPermissionInformation !== undefined )
+    {
       const permissionResponse = await requestPermission();
 
       return permissionResponse.granted;

@@ -32,7 +32,9 @@
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.FOREGROUND_SERVICE",
-        "android.permission.ACCESS_BACKGROUND_LOCATION"
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.WAKE_LOCK",
+        "android.permission.ACCESS_NOTIFICATION_POLICY"
       ],
       "package": "com.triplebit.KidsSecurity",
       "googleServicesFile": "./google-services.json"

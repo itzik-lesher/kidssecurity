@@ -76,7 +76,7 @@ function UsersList() {
     //    JSON.stringify(allContext, null, 2)
     //);
   }, []);
-
+  /* 23-6-2024
   // the following useEffect is only to enter for debugging initail
   // pnone numbers. In A51 we get 0523010298, in the EItan we get 0546552991
   // WHich belongs to יאלי הרצליה
@@ -87,7 +87,7 @@ function UsersList() {
       allContext.setLocalPhoneNumberCtx(allContext.localPhoneNumberCtx);
     }
   }, []);
-
+  */
   const onChangeSelectedUserHandler = (enteredText) => {
     setSelectedUser(enteredText);
     //console.log("enteredText =" + enteredText);
@@ -103,136 +103,23 @@ function UsersList() {
     });
     setTempContsacts(fiteredUser);
   };
-
+  /* 23-6-2024
   const enterLoaclPhoneManuallyHandler = (localPhoneNumber) => {
     allContext.setLocalPhoneNumberCtx(localPhoneNumber);
   };
-
-  // called when we select somebody from the registered users
-  /*
-  const onAddContactHandler = async (index, e) => {
-    //  "tempContacts[index]=" + JSON.stringify(tempContacts[index], null, 2)
-    //);
-    const phoneNumber = tempContacts[index].phoneNumbers[0].number;
-    if (allContext.localPhoneNumberCtx.length != 10) {
-      Alert.alert("הכנס מספר טלפון שלך");
-      return;
-    }
-    //console.log("phone =" + phoneNumber);
-    const name = tempContacts[index].name;
-    // give an id according to name
-    // !!!!!!!!!! consider remove the id from state or modify with random
-    const id = tempContacts[index].name;
-    //console.log("name =" + name);
-
-    // First search for this user in local DB
-
-    const userExistCheck = await searchIfUserExists(phoneNumber);
-    console.log("userExistCheck = " + userExistCheck);
-    console.log(JSON.stringify(userExistCheck, null, 2));
-    console.log("userExistCheck.rows.length = " + userExistCheck.rows.length);
-    console.log(
-      "userExistCheck.rows._array[0].pushtoken.slice(0,17) = " +
-        userExistCheck.rows._array[0].pushtoken.slice(0, 17)
-    );
-    if (
-      userExistCheck.rows.length === 1
-      //userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
-      //  "ExponentPushToken"
-    ) {
-      console.log("userExistCheck.length === 1");
-      // Meanning user already exists,
-      // Do nothing
-      // we have the partner pushToken so peobabaly in rest DB our
-      // record with both tokens and if not than the other partner got it also
-      // and deleted this record
-      return;
-    } else {
-      console.log("userExistCheck.length === 0");
-      // user exists but token = 'notKnown'
-      // continue to the next step in onAddContactHandler hoping
-      // the POST will return the real token
-    }
-
-    // update state with new registeredUser
-    allContext.addRegisteredUserCtx([id, name, phoneNumber]);
-    console.log("after addRegisteredUserCtx");
-
-    // Rest api to kidssecurity.triplebit.com from Postman
-    // I took it as is from POSTM and modified on ly on line later:
-    // .then((response) => response.text()) => .then((response) => response.json())
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      local_name: "localName",
-      local_phone: allContext.localPhoneNumberCtx,
-      local_token: allContext.localPushTokenCtx,
-      remote_name: name,
-      remote_phone: phoneNumber,
-      remote_token: "notKnown",
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(
-      "https://kidssecurity.triplebit.com/wp-json/wp-learn-form-submissions-api/v1/form-submissions/",
-      requestOptions
-    )
-      //.then((response) => response.text())
-      // Worked only when I changed text() to json()
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("fetch to kidssecurity result = " + result);
-        // if we have a matching partner we get 3 json porperties string
-        if (Object.keys(result).length === 3) {
-          // ther is a match to a partner record
-          console.log("remote name = " + result.remote_name);
-          console.log("remote phone = " + result.remote_phone);
-          console.log("remote token = " + result.remote_token);
-          // !!! modify that since may exists with unknown pushtoken
-          insertUser({
-            name: result.remote_name,
-            tel: result.remote_phone,
-            pushtoken: result.remote_token,
-          });
-        } else if (result === 1) {
-          // No match. The row was inserted to WP DB
-          // there is no match to a partner
-          // Insert it also to local DB with an unknown pudhToken
-          console.log("phoneNumber = " + phoneNumber);
-          insertUser({
-            name: name,
-            tel: phoneNumber,
-            pushtoken: "notKnown",
-          });
-        } else if (result === 0) {
-          // Dont insert into local DB since not inserted in Rest DB
-          // - probably duplicated user
-        }
-      })
-      .catch((error) => console.log("error", error));
-
-    // |End
-
-    // move automatically to HomeScreen
-    navigation.navigate("HomeScreen");
-  }; //  const onAddContactHandler = async (index, e) => {
   */
+
   const onAddContactHandlerReplace = async (index, e) => {
+    console.log('iiiiiiiiiiiiiiiiiiiinside onAddContactHandlerReplace UserList', allContext.localPhoneNumberCtx);
     //  "tempContacts[index]=" + JSON.stringify(tempContacts[index], null, 2)
     //);
     const phoneNumber = tempContacts[index].phoneNumbers[0].number;
+    /* 23-6-2024
     if (allContext.localPhoneNumberCtx.length != 10) {
       Alert.alert("הכנס מספר טלפון שלך");
       return;
     }
+    */
     //console.log("phone =" + phoneNumber);
     const name = tempContacts[index].name;
     // give an id according to name
@@ -247,11 +134,7 @@ function UsersList() {
     console.log(JSON.stringify(userExistCheck, null, 2));
     console.log("userExistCheck.rows.length = " + userExistCheck.rows.length);
 
-    // if (
-    //  userExistCheck.rows.length === 1 &&
-    //  userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
-    //    "ExponentPushToken"
-    //)
+    // check if token is meaningfull or just "unknown"
     if (userExistCheck.rows.length === 1) {
       if (
         userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
@@ -264,7 +147,7 @@ function UsersList() {
         console.log(
           "userExistCheck.length === 1 && real token:ExponentPushToken... "
         );
-        // Meanning user already exists,
+        // Meanning user already exists with meaningfull PushToken,
         // Do nothing
         // we have the partner pushToken so peobabaly in rest DB our
         // record with both tokens and if not than the other partner got it also
@@ -281,7 +164,10 @@ function UsersList() {
     // update state with new registeredUser
     allContext.addRegisteredUserCtx([id, name, phoneNumber, pushToken]);
     console.log("after addRegisteredUserCtx");
-
+    console.log("AAAAAAAAAAAA in  addRegisteredUserCtx", id);
+    console.log("AAAAAAAAAAAA in  addRegisteredUserCtx", name);
+    console.log("AAAAAAAAAAAA in  addRegisteredUserCtx", phoneNumber);
+    console.log("AAAAAAAAAAAA in  addRegisteredUserCtx", pushToken);
     // Rest api to kidssecurity.triplebit.com from Postman
     // I took it as is from POSTM and modified on ly on line later:
     // .then((response) => response.text()) => .then((response) => response.json())
@@ -322,7 +208,8 @@ function UsersList() {
           console.log("remote token = " + result.remote_token);
           // !!! modify that since may exists with unknown pushtoken
           replaceUser({
-            name: result.remote_name,
+            //name: result.remote_name,
+            name: name,
             tel: result.remote_phone,
             pushtoken: result.remote_token,
           });
@@ -392,12 +279,12 @@ function UsersList() {
           keyExtractor={(item, index) => index}
         />
       ) : null}
-      <TextInput
+      {/*23-6-2024 <TextInput
         style={styles.localPhone}
         placeholder="הכנס את מספר הטלפון שלך"
         value={allContext.localPhoneNumberCtx}
         onChangeText={enterLoaclPhoneManuallyHandler}
-      />
+      />*/}
     </View>
   );
 

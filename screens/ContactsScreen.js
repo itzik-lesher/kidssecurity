@@ -2,6 +2,8 @@ import { useLayoutEffect, useEffect, useState } from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
 import UsersList from "../contact_users_from_phone/UsersList";
 import IconButton from "../components/GUI/IconButton";
+import VolumeManager from "../components/VolumeManager";
+import { AllContext } from "../store/context/all-context";
 //import * as Contacts from "expo-contacts";
 
 function ContactsScreen({ navigation }) {
@@ -27,7 +29,12 @@ function ContactsScreen({ navigation }) {
     });
   }, [navigation]);
 
-  return <UsersList />;
+  return(
+    <>
+     <UsersList />
+      <VolumeManager />
+    </>
+  )
 }
 export default ContactsScreen;
 

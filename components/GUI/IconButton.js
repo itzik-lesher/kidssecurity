@@ -4,7 +4,7 @@ function IconButton({ onPress, iconText }) {
   return (
     <Pressable style={styles.headerIcon} onPress={onPress}>
       <Text style={styles.text}>{iconText}</Text>
-      <Ionicons name="md-arrow-forward" size={32} color="black" />
+      <Ionicons name="arrow-forward-outline" size={32} color="black" />
     </Pressable>
   );
 }

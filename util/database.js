@@ -1,9 +1,21 @@
-import * as SQLite from "expo-sqlite";
+import * as SQLite from "expo-sqlite/legacy";
 
 // if doent exist - it will be created
 //const database = SQLite.openDatabase("usrer_phone_pudhtoken.db");
 // build a new DB since tel uses the INTEGER instead of TEXT
-const database = SQLite.openDatabase("user_phone_token.db");
+const database = SQLite.openDatabase("user_phone_token2.db");
+
+// LIST of ALL FUNCTIONS HERE
+
+// Drop User from PhusToken Databse
+ // insertUser
+// replaceUser
+// searchIfUserExists
+// getTokenFromPhone
+// dropUser
+// dropAllUsers
+// fetchRegisteredUsers
+
 
 export function init() {
   //console.log("init1");
@@ -11,9 +23,12 @@ export function init() {
     database.transaction((tx) => {
       //console.log("init2");
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS user_phone_token (
+        `CREATE TABLE IF NOT EXISTS user_phone_token2 (
         id INTEGER PRIMARY KEY NOT NULL,
         name TEXT NOT NULL,
+        suspended TEXT,
+        reserved1 TEXT,
+        reserved2 TEXT,
         tel TEXT NOT NULL UNIQUE,
         pushtoken TEXT NOT NULL
        )`,
@@ -54,7 +69,7 @@ export function insertUser(registereduser) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO user_phone_token (name, tel, pushtoken) VALUES (?, ?, ?)`,
+        `INSERT INTO user_phone_token2 (name, tel, pushtoken) VALUES (?, ?, ?)`,
         //[registereduser.name, registereduser.tel],
         [registereduser.name, telCleaned_final, registereduser.pushtoken],
         (_, result) => {
@@ -100,7 +115,7 @@ export function replaceUser(registereduser) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `REPLACE INTO user_phone_token (name, tel, pushtoken) VALUES (?, ?, ?)`,
+        `REPLACE INTO user_phone_token2 (name, tel, pushtoken) VALUES (?, ?, ?)`,
         //[registereduser.name, registereduser.tel],
         [registereduser.name, telCleaned_final, registereduser.pushtoken],
         (_, result) => {
@@ -121,11 +136,12 @@ export function replaceUser(registereduser) {
 
   return promise;
 }
+
 export function searchIfUserExists(telCleaned_final) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `SELECT * FROM user_phone_token WHERE tel = ? and pushtoken LIKE "ExponentPushToken%" `,
+        `SELECT * FROM user_phone_token2 WHERE tel = ? and pushtoken LIKE "ExponentPushToken%" `,
         [telCleaned_final],
         (_, result) => {
           resolve(result);
@@ -147,7 +163,7 @@ export function getTokenFromPhone(telCleaned_final) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `SELECT * FROM user_phone_token WHERE tel = ? and pushtoken LIKE "ExponentPushToken%" `,
+        `SELECT * FROM user_phone_token2 WHERE tel = ? and pushtoken LIKE "ExponentPushToken%" `,
         //`SELECT * FROM user_phone_token WHERE pushtoken LIKE "ExponentPushToken%" `,
         [telCleaned_final],
         (_, result) => {
@@ -168,13 +184,12 @@ export function getTokenFromPhone(telCleaned_final) {
   return promise;
 } // getTokenFromPhone
 
-// Drop User from PhusToken Databse
 
 export function dropUser(registereduser) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `DELETE FROM user_phone_token WHERE name = ?`,
+        `DELETE FROM user_phone_token2 WHERE name = ?`,
         [registereduser],
         (_, result) => {
           resolve(result);
@@ -196,7 +211,7 @@ export function dropAllUsers() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `DELETE FROM user_phone_token`,
+        `DELETE FROM user_phone_token2`,
         (_, result) => {
           resolve(result);
           console.log("result = " + result);
@@ -241,18 +256,18 @@ export function deletetUser(registereduser) {
   return promise;
 }
 */
+
 export function fetchRegisteredUsers() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM user_phone_token",
+        "SELECT * FROM user_phone_token2",
         [],
         (_, result) => {
           resolve(result);
-          //console.log(
-          //  "result fetching users FFFFFFFFFF = " +
-          //    JSON.stringify(result, null, 2)
-          //);
+          console.log(
+            "result fetching users FFFFFFFFFF = " +
+              JSON.stringify(result, null, 2));
         },
         (_, error) => {
           reject(error);
