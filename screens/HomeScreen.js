@@ -715,7 +715,7 @@ function HomeScreen({ navigation }) {
         
         {isSetLocalPhoneNumber ? 
         (
-        <View >
+        <View style= ''>
           <Text style= '' > הקש על אחד מהרשומים כדי לבצע עליו פעלויות בטיחות</Text>
         </View> 
         )
