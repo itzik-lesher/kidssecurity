@@ -39,16 +39,18 @@ function RegisteredUsers({ navigation }) {
       console.log(JSON.stringify(prevState, null, 2));
      const newState =  {...prevState, selectedUser:selectedUser, pushtoken:pushtoken,phone:phone}
      console.log(JSON.stringify(newState, null, 2));
+     return newState;
     })
   }
 
   useEffect(() => {
     async function cheCeckUserByPhone() {
-      const regUsers = await fetchRegisteredUsers();
+      //const regUsers = await fetchRegisteredUsers();
 
-      let userObject =  getTokenFromPhone(navigateToManageUserScreen.phone);
-      console.log('userObject iside USEFFECT follows');
+      let userObject =  await getTokenFromPhone(navigateToManageUserScreen.phone);
+      console.log('userObject iside USEFFECT follows');     
       console.log(JSON.stringify(userObject, null, 2));
+      console.log('navigateToManageUserScreen.phone', navigateToManageUserScreen.phone);
     }
     cheCeckUserByPhone();
   }, [navigateToManageUserScreen])
