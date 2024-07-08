@@ -159,7 +159,7 @@ export function searchIfUserExists(telCleaned_final) {
   return promise;
 }
 
-export function getTokenFromPhone(telCleaned_final) {
+export  function getTokenFromPhone(telCleaned_final) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(

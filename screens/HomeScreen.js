@@ -48,6 +48,7 @@ TaskManager.defineTask(
     // rest api just to verify that was sent here in the background
     // its used only in "location-request"
       /////////////////////////////////////////////////
+  /* commented out in 7-7-2024
   // Rest api from App.js
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -110,7 +111,7 @@ TaskManager.defineTask(
         }
       })
       .catch((error) => console.log("error", error));
-
+*/
 // End Rest api
 /////////////////////////////////////////////////     
 
@@ -470,7 +471,8 @@ function HomeScreen({ navigation }) {
               //body:  JSON.stringify(platformModel),
             }),
           });
-
+          /////////////////////////////////////////////
+          /* commnted out in7-7-2024
           // 4-5 for Debugging send also SM1 Smasung
           fetch("https://exp.host/--/api/v2/push/send", {
             method: "POST",
@@ -485,6 +487,8 @@ function HomeScreen({ navigation }) {
               //body:  JSON.stringify(platformModel),
             }),
           });
+          */
+         ///////////////////////////////////
           // 4-5 END - for Debugging send also SM1 Smasung
         } // if (notification.request.content.title === "location-request") {
 
@@ -715,7 +719,7 @@ function HomeScreen({ navigation }) {
         
         {isSetLocalPhoneNumber ? 
         (
-        <View >
+        <View style=''>
           <Text style= '' > הקש על אחד מהרשומים כדי לבצע עליו פעלויות בטיחות</Text>
         </View> 
         )

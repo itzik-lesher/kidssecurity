@@ -153,13 +153,16 @@ function UsersList() {
         // record with both tokens and if not than the other partner got it also
         // and deleted this record
         return;
-      } else {
+      } else { // if (userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
+               // "ExponentPushToken" )
         console.log("userExistCheck.length !=== 1 || not ExponentPushToken");
         // user exists but token = 'notKnown'
         // continue to the next step in onAddContactHandler hoping
         // the POST will return the real token
       }
     } // if (userExistCheck.rows.length === 1) {
+
+    // Arrive here if user doesn't exist at all in local SQlite
 
     // update state with new registeredUser
     allContext.addRegisteredUserCtx([id, name, phoneNumber, pushToken]);
