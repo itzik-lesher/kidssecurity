@@ -32,6 +32,7 @@ function RegisteredUsers({ navigation }) {
   }, []);
   
   function onPressRegisteredUserHandlerNew(selectedUser, phone, pushtoken) {
+    console.log("Inside onPressRegisteredUserHandlerNew");
     // this triggers useEffect to call async db call and than to navigate
     setNavigateToManageUserScreen((prevState) =>{
       console.log("Inside onPressRegisteredUserHandlerNew");
@@ -40,6 +41,17 @@ function RegisteredUsers({ navigation }) {
      console.log(JSON.stringify(newState, null, 2));
     })
   }
+
+  useEffect(() => {
+    async function cheCeckUserByPhone() {
+      const regUsers = await fetchRegisteredUsers();
+
+      let userObject =  getTokenFromPhone(navigateToManageUserScreen.phone);
+      console.log('userObject iside USEFFECT follows');
+      console.log(JSON.stringify(userObject, null, 2));
+    }
+    cheCeckUserByPhone();
+  }, [navigateToManageUserScreen])
   /*
   function onPressRegisteredUserHandler(selectedUser, phone, pushtoken) {
     console.log("PRESS On Registed User");
