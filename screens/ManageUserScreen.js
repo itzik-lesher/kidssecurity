@@ -57,8 +57,11 @@ function ManageUserScreen({ route, navigation }) {
 
     let userObject = await getTokenFromPhone(route.params.phone);
 
-    /////$$$sendMeInfo("location-request", route.params.pushtoken);
-    sendMeInfo("location-request", userObject.rows._array[0].pushtoken);
+    // 13-7 adding condition that not undefined
+    // 14-7 better check if ( userObject.rows._array[0].pushtoken){
+      if ( typeof userObject.rows._array[0].pushtoken !== 'undefined'){
+        sendMeInfo("location-request", userObject.rows._array[0].pushtoken);
+      }
   }
   /*
   // sender function
@@ -132,7 +135,10 @@ function ManageUserScreen({ route, navigation }) {
 
     /////$$$sendMeInfo("location-request", route.params.pushtoken);
     //sendMeInfo("location-request", userObject.rows._array[0].pushtoken);
+    // 13-7 adding condition that not undefined
+    if (userObject.rows._array[0].pushtoken){
     sendExecuteTriggerFunction("volume-request", userObject.rows._array[0].pushtoken);
+    }
   }
 
   
