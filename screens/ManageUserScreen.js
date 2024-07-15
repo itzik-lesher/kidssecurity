@@ -141,6 +141,21 @@ function ManageUserScreen({ route, navigation }) {
     }
   }
 
+  async function natuaralizeTemporarry() {
+   
+    ///!! 5-6-Following is not needed in setVolumeNorml
+    // allContext.setDisplayLocationStoreCtx(false)
+    // get pushtoken from Sqlite
+
+    let userObject = await getTokenFromPhone(route.params.phone);
+
+    /////$$$sendMeInfo("location-request", route.params.pushtoken);
+    //sendMeInfo("location-request", userObject.rows._array[0].pushtoken);
+    // 13-7 adding condition that not undefined
+    if (userObject.rows._array[0].pushtoken){
+    sendExecuteTriggerFunction("naturalize-temporarry", userObject.rows._array[0].pushtoken);
+    }
+  }
   
   const sendExecuteTriggerFunction = async (request, targetPudhToken) => {
     const apiUrl = "https://exp.host/--/api/v2/push/send";
@@ -150,7 +165,9 @@ function ManageUserScreen({ route, navigation }) {
       body: allContext.localPushTokenCtx,
       //data: { pushToken: allContext.localPushTokenCtx},
       // add goal to data:
-      data: { pushToken: allContext.localPushTokenCtx, goal: 'volume-request' },
+      // 15-7 data: { pushToken: allContext.localPushTokenCtx, goal: 'volume-request' },
+      //15-7 make it general function
+      data: { pushToken: allContext.localPushTokenCtx, goal: request},
     };
     try {
       const response = await fetch(apiUrl, {
@@ -197,6 +214,7 @@ function ManageUserScreen({ route, navigation }) {
        <Text style={styles.volume_title} onPress={setVolumeNormal}>הרם ווליום</Text>
       {volumeIsNormal ? <Text style={styles.volume_result} >{"ווליום הועלה אצל הנמען"}</Text> : null}
       <Text style={styles.listen_title} >האזן לטלפון</Text>
+      <Text style={styles.volume_title} onPress={natuaralizeTemporarry}>נטרל משתמש זמנית</Text>
       <Text style={styles.del_user} onPress={deletUserFromDb.bind(this, route.params.selectedUser)}>
         מחק משתמש
       </Text>

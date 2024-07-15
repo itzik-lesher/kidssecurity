@@ -153,6 +153,7 @@ function UsersList() {
         // record with both tokens and if not than the other partner got it also
         // and deleted this record
         Alert.alert('משתמש כבר רשום אצלך');
+        // the return avoids navigating to HomsScreen
         return;
       } else { // if (userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
                // "ExponentPushToken" )
