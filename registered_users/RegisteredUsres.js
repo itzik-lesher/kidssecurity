@@ -330,7 +330,7 @@ function RegisteredUsers({ navigation }) {
               >
                 {user.name}
                 {user.tel}
-                
+                {user.pushtoken}
                 <Ionicons name="checkmark-done-outline" color="#ff0000" size={20} />
               </Text>
             </View>
