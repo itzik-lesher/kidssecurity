@@ -62,7 +62,7 @@ function ManageUserScreen({ route, navigation }) {
       if ( typeof userObject.rows._array[0].pushtoken !== 'undefined'){
         sendMeInfo("location-request", userObject.rows._array[0].pushtoken);
       }
-  }
+  } a
   /*
   // sender function
   function sendMeInfo(request, targetPudhToken) {
