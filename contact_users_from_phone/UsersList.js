@@ -152,6 +152,7 @@ function UsersList() {
         // we have the partner pushToken so peobabaly in rest DB our
         // record with both tokens and if not than the other partner got it also
         // and deleted this record
+        Alert.alert('משתמש כבר רשום אצלך');
         return;
       } else { // if (userExistCheck.rows._array[0].pushtoken.slice(0, 17) ===
                // "ExponentPushToken" )
