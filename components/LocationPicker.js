@@ -51,6 +51,11 @@ zustandPlatformModel: [],
 // Define function to update Zustand state using component state value
 setZustandPlatformModel: (value) => set({ zustandPlatformModel: value }),
 
+// upon startup tracking is enabled
+myTrackingState: true,
+//enableMyTracking: () => set ({myTrackingState: true}),
+//disableMyTracking: () => set ({myTrackingState: false}),
+setMyTrackingState: (value) => set({myTrackingState : value})
 
 }));
 //!!

@@ -140,7 +140,7 @@ function ManageUserScreen({ route, navigation }) {
     sendExecuteTriggerFunction("volume-request", userObject.rows._array[0].pushtoken);
     }
   }
-
+  // 15-7 duplicated from setVolumeNormal
   async function natuaralizeTemporarry() {
    
     ///!! 5-6-Following is not needed in setVolumeNorml

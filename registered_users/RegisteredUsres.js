@@ -7,6 +7,7 @@ import { fetchRegisteredUsers, replaceUser } from "../util/database";
     
 import { getTokenFromPhone } from '../util/database';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useBearStore2 } from "../components/LocationPicker";
 
 function RegisteredUsers({ navigation }) {
   const allContext = useContext(AllContext);
@@ -309,6 +310,21 @@ function RegisteredUsers({ navigation }) {
   } // function onPressRegisteredUserHandler(selectedUser, phone, pushtoken) {
 
   /////////////////////////////////////////
+  //onst setZustandProperty = useBearStore2((state) => state.setZustandProperty);
+  //const setZustandAcceptedLocation = useBearStore2((state) => state.setZustandAcceptedLocation);
+  //let locationText = JSON.stringify(useBearStore2.getState().localStateLocalPhone)
+
+  const setMyTrackingState = useBearStore2((state) => state.setMyTrackingState);
+  const onPressTemporarryStopTracking = () =>{
+    // using zustand stop tracking
+    console.log('onPressTemporarryStopTracking');
+    //console.log(JSON.stringify(useBearStore2.state.setMyTrackingState, null, 2));
+    //console.log(useBearStore2.state)
+    console.log(JSON.stringify(useBearStore2.getState().myTrackingState));
+    setMyTrackingState(false);
+    //console.log(JSON.stringify(useBearStore2, null, 2));
+    console.log(JSON.stringify(useBearStore2.getState().myTrackingState));
+  };
 
   const usersList = (
     <>
@@ -343,6 +359,7 @@ function RegisteredUsers({ navigation }) {
     <View style={{ flex: 1 }}>
       <Text>Users Details</Text>
       {usersList}
+      <Text onPress={onPressTemporarryStopTracking}>הפסק זמנית מעקב אחרי</Text>
     </View>
   );
 }
